@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        {{ form_start(form) }}
+            <div class="row">
+                <div class="col">{{ form_row(form.firstName) }}</div>
+                <div class="col">{{ form_row(form.lastName) }}</div>
+                <div class="col">{{ form_row(form.birthDate) }}</div>
+            </div>
+
+            <div class="text-center">
+                <button type="submit" id="submit" class="btn btn-success">Save</button>
+            </div>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

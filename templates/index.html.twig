@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                Technical test
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Instructions</h5>
+                <p class="card-text">
+                    <ul>
+                        <li>Écrire une classe Personne ayant comme attributs : un nom, prénom, date de naissance.</li>
+                        <li>Créer une base de données correspondante</li>
+                        <li>Créer une page avec un formulaire (“nom”,“prénom”,“date de naissance”, bouton “valider”)</li>
+                    </ul>
+                </p>
+                <a href="{{ path('index_user') }}" class="btn btn-primary">Go index</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
