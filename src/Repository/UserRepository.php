@@ -12,4 +12,13 @@ class UserRepository extends AbstractRepository
     {
         parent::__construct($registry, User::class);
     }
+
+    public function getAllByName()
+    {
+        $qb = $this->createQueryBuilder('u')
+            ->orderBy('u.lastName', 'asc')
+            ->getQuery();
+
+        return $qb->getResult();
+    }
 }

@@ -33,7 +33,7 @@ class DefaultController extends AbstractController
     public function index(UserRepository $repository)
     {
         return $this->render('indexUser.html.twig', [
-            'users' => $repository->findAll(),
+            'users' => $repository->getAllByName(),
         ]);
     }
 
