@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Command\Command\AddUserCommand;
 use App\Command\CommandHandler\AddUserCommandHandler;
 use App\Repository\UserRepository;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -30,10 +31,16 @@ class DefaultController extends AbstractController
      *
      * @Route("/index-user", name="index_user")
      */
-    public function index(UserRepository $repository)
+    public function index(UserRepository $repository, Request $request, PaginatorInterface $paginator)
     {
+        $pagination = $paginator->paginate(
+            $repository->getAllByName(),
+            $request->query->getInt('page', 1),
+            5
+        );
+
         return $this->render('indexUser.html.twig', [
-            'users' => $repository->getAllByName(),
+            'users' => $pagination,
         ]);
     }
 

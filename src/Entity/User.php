@@ -11,6 +11,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class User
 {
+
+    const AGE_LIMIT = 150;
+
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
@@ -110,5 +113,14 @@ class User
     public function setBirthDate(DateTime $birthDate)
     {
         $this->birthDate = $birthDate;
+    }
+
+    public function getAge(): string
+    {
+        $birthDate = ($this->getBirthDate())->format("Y-m-d");
+        $today = date("Y-m-d");
+        $age = date_diff(date_create($birthDate), date_create($today));
+
+        return $age->format('%y');
     }
 }

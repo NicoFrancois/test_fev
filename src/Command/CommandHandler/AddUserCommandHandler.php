@@ -29,18 +29,19 @@ class AddUserCommandHandler
     {
         $user = new User();
 
-        $ageYear = explode('/', $command->birthDate->format('Y'));
-        $now = explode('/', date('Y'));
+        $birthDate = ($command->birthDate)->format("Y-m-d");
+        $today = date("Y-m-d");
+        $age = date_diff(date_create($birthDate), date_create($today));
 
-        if (($now[0] - $ageYear[0]) > 150){
-            throw new \Exception('Error - age exceeds age limit (150)');
-        } else {
+        if ($age->format('%y') < User::AGE_LIMIT){
             $user->setFirstName($command->firstName);
             $user->setLastName($command->lastName);
             $user->setCreationDate(new \DateTime());
             $user->setBirthDate($command->birthDate);
 
             $this->repository->save($user);
+        } else {
+            throw new \Exception('Sorry - age exceeds age limit (150)');
         }
     }
 }

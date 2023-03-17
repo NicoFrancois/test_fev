@@ -1,0 +1,18 @@
+{% if app.request.hasPreviousSession %}
+    {% for flash_message in app.session.flashBag.get('success') %}
+        <div class="alert alert-success">
+            <div class="container">
+                <i class="icon-check"></i>
+                <span class="ml-2">{{ flash_message|nl2br}}</span>
+            </div>
+        </div>
+    {% endfor %}
+    {% for flash_message in app.session.flashBag.get('error') %}
+        <div class="alert alert-danger">
+            <div class="container">
+                <i class="icon-ban"></i>
+                <span class="ml-2">{{ flash_message|nl2br}}</span>
+            </div>
+        </div>
+    {% endfor %}
+{% endif %}
